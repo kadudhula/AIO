@@ -1,8 +1,21 @@
 ".container": {
 	backgroundColor:"white"
 },
-"Label": {
-	width: Ti.UI.SIZE,
-	height: Ti.UI.SIZE,
-	color: "#000"
-} 
+'#txtUsername':{
+	borderStyle:Ti.UI.INPUT_BORDERSTYLE_ROUNDED,
+	 color:"#336699" ,
+	 top:"100" ,
+	 left:"10" ,
+	 width:"300" ,
+	 height:"60",
+	  hintText:"Mobile No" 
+}
+'#txtPassword':{
+	borderStyle:Ti.UI.INPUT_BORDERSTYLE_ROUNDED ,
+	color:"#336699",
+	 top:"180" ,
+	 left:"10",
+	 width:"300",
+	 height:"60" ,
+	 hintText:"Password" 
+}
