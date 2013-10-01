@@ -1,13 +1,13 @@
 module.exports = [ {
     isClass: true,
-    priority: 10000.0002,
+    priority: 10000.0004,
     key: "container",
     style: {
         backgroundColor: "white"
     }
 }, {
     isId: true,
-    priority: 100000.0003,
+    priority: 100000.0005,
     key: "txtUsername",
     style: {
         borderStyle: Ti.UI.INPUT_BORDERSTYLE_ROUNDED,
@@ -20,7 +20,7 @@ module.exports = [ {
     }
 }, {
     isId: true,
-    priority: 100000.0004,
+    priority: 100000.0006,
     key: "txtPassword",
     style: {
         borderStyle: Ti.UI.INPUT_BORDERSTYLE_ROUNDED,

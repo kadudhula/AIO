@@ -1,6 +1,6 @@
 
 
-
+FBLogin();
 
 function FBLogin()
    {
@@ -34,9 +34,11 @@ function FBLogin()
 		}, 'GET', function(e) {
 			
 			if (e.success) {
-				var User =[];
-				User.Details = JSON.parse(e.result);
-					Titanium.App.Properties.setString("userID", User.Details.username);
+				
+				UserDetails = JSON.parse(e.result);
+				alert(UserDetails);
+					Titanium.App.Properties.setString("userID", UserDetails.username);
+					SaveUserFromFB(UserDetails);
 			} else {
 				Ti.API.info("requestWithGraphPath " + e.error);
 			}
@@ -45,7 +47,11 @@ function FBLogin()
 	  } 
  function SaveUserFromFB(user)
      {
+     	alert("in save user");
+     	GetCurrentPostion();
      	var userDetails={};
+     	userDetails.UserName=UserDetails.username;
+     	
 		  var xhr = Titanium.Network.createHTTPClient();
 			xhr.open('POST', url);
 			xhr.onload = function() {
@@ -74,5 +80,21 @@ function FBLogin()
 			};
 			xhr.send(JSON.stringify(userDetails));	
      	
+     }
+     
+     function GetCurrentPostion()
+     {
+     	
+     	Titanium.Geolocation.getCurrentPosition(function(e)
+       {
+        if (!e.success || e.error)
+       {
+            alert('error in getCurrentPosition = ' + JSON.stringify(e.error));
+            return;
+        }
+        var Position=[];
+        Position. longitude = e.coords.longitude;
+        Position. latitude = e.coords.latitude;
+      });
      }
  

@@ -1,5 +1,45 @@
 function Controller() {
-    function Login() {}
+    function FBLogin() {
+        var facebook = require("facebook");
+        facebook.appid = "1410669699149378";
+        facebook.permissions = [ "publish_stream", "read_stream" ];
+        facebook.forceDialogAuth = true;
+        facebook.addEventListener("login", function(e) {
+            e.success ? GetUserDetails() : e.error ? alert(e.error) : e.cancelled && alert("Canceled");
+        });
+        if (facebook.loggedIn) {
+            facebook.logout();
+            facebook.authorize();
+        } else {
+            Ti.API.info("facebook.loggedIn clicked: ");
+            facebook.authorize();
+        }
+    }
+    function FBLoginCheck() {
+        var xhr = Titanium.Network.createHTTPClient();
+        xhr.open("GET", url);
+        xhr.onload = function() {
+            var user = JSON.parse(this.responseText);
+            alert(user);
+            return user;
+        };
+        xhr.onerror = function(e) {
+            Ti.API.error(e.error);
+            alert(e.error);
+        };
+        xhr.send();
+    }
+    function GetUserDetails() {
+        facebook.requestWithGraphPath("me", {
+            fields: "id,name,picture,hometown,username"
+        }, "GET", function(e) {
+            if (e.success) {
+                UserDetails = JSON.parse(e.result);
+                Titanium.App.Properties.setString("userID", UserDetails.id);
+                FBLoginCheck(User.Details.id);
+            } else Ti.API.info("requestWithGraphPath " + e.error);
+        });
+    }
     require("alloy/controllers/BaseController").apply(this, Array.prototype.slice.call(arguments));
     this.__controllerPath = "index";
     arguments[0] ? arguments[0]["__parentSymbol"] : null;
@@ -37,11 +77,12 @@ function Controller() {
         id: "btnLogin"
     });
     $.__views.loginView.add($.__views.btnLogin);
-    Login ? $.__views.btnLogin.addEventListener("click", Login) : __defers["$.__views.btnLogin!click!Login"] = true;
+    FBLogin ? $.__views.btnLogin.addEventListener("click", FBLogin) : __defers["$.__views.btnLogin!click!FBLogin"] = true;
     exports.destroy = function() {};
     _.extend($, $.__views);
     $.loginWindow.open();
-    __defers["$.__views.btnLogin!click!Login"] && $.__views.btnLogin.addEventListener("click", Login);
+    Alloy.createController("Register").getView().open();
+    __defers["$.__views.btnLogin!click!FBLogin"] && $.__views.btnLogin.addEventListener("click", FBLogin);
     _.extend($, exports);
 }
 

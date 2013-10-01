@@ -3,7 +3,7 @@
 		<View id="loginView">
 	 <TextField id="txtUserName" />
 	 <TextField id="txtPassword" />	 
-	<Button id="btnLogin" onClick="Login"> Login </Button>
+	<Button id="btnLogin" onClick="FBLogin"> Login </Button>
 		</View>
 	</Window>
 </Alloy>

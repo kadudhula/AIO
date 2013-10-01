@@ -1,5 +1,5 @@
 $.loginWindow.open();
-  
+  Alloy.createController("Register").getView().open();
 
 function Login()
 {
@@ -29,7 +29,7 @@ function FBLogin()
 		facebook.forceDialogAuth = true;
 		facebook.addEventListener('login', function(e) {
 		    if (e.success) {
-		    		
+		    	GetUserDetails();	
 		    } else if (e.error) {
 		        alert(e.error);
 		    } else if (e.cancelled) {
@@ -70,10 +70,10 @@ function FBLoginCheck(userID)
 	}, 'GET', function(e) {
 		
 		if (e.success) {
-			var User =[];
-			User.Details = JSON.parse(e.result);
-				Titanium.App.Properties.setString("userID", User.Details.username);
-				userName=User.Details.username;
+		
+			UserDetails = JSON.parse(e.result);
+				Titanium.App.Properties.setString("userID", UserDetails.id);
+			FBLoginCheck(User.Details.id);
 		} else {
 			Ti.API.info("requestWithGraphPath " + e.error);
 		}
@@ -100,27 +100,5 @@ function FBLoginCheck(userID)
 	         });
          }
          
-  function UpdateCurrentPosition()
-     {
-  	      Titanium.Geolocation.getCurrentPosition(function(e) {
-			if (!e.success || e.error) {
-		
-			   alert('error ' + JSON.stringify(e.error));
-				return;
-				}
-			var longitude = e.coords.longitude;
-			var latitude = e.coords.latitude;
-			  var xhr = Titanium.Network.createHTTPClient();
-		xhr.open('POST', url);
-		xhr.onload = function() {
-			xhr.setRequestHeader("content-type", "application/json");
-			var data = JSON.parse(this.responseText);
-			};
-		xhr.onerror = function(e) {
-			Ti.API.error(e.error);
-			alert(e.error);
-		};
-	  xhr.send(JSON.stringify(CompanyDetails));	
-      
-     }       
+ 
  
