@@ -50,8 +50,13 @@ function FBLogin()
      	alert("in save user");
      	GetCurrentPostion();
      	var userDetails={};
-     	userDetails.UserName=UserDetails.username;
-     	
+     	userDetails.UserID=user.id;
+     	userDetails.UserName=user.username;
+     	userDetails.Image=user.picture.data.url;
+     	userDetails.Address=user.hometown;
+     	userDetails.C_Latitude= Position. latitude;
+     	userDetails.C_Logitude=Position. longitude;
+     	userDetails.LoginType="FB";
 		  var xhr = Titanium.Network.createHTTPClient();
 			xhr.open('POST', url);
 			xhr.onload = function() {

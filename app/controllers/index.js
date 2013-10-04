@@ -66,7 +66,7 @@ function FBLoginCheck(userID)
   function GetUserDetails()
   {
   	facebook.requestWithGraphPath('me', {
-		'fields' : 'id,name,picture,hometown,username',
+		'fields' : 'id',
 	}, 'GET', function(e) {
 		
 		if (e.success) {

@@ -2,3 +2,31 @@
 ".container" : {
   
 }
+
+'#txtName':{
+	borderStyle:Ti.UI.INPUT_BORDERSTYLE_ROUNDED,
+	 color:"#336699" ,
+	 top:"40" ,
+	 left:"10" ,
+	 width:"165" ,
+	 height:"60",
+ hintText:'Name'
+}
+'#txtMobileNo':{
+	borderStyle:Ti.UI.INPUT_BORDERSTYLE_ROUNDED,
+	 color:"#336699" ,
+	 top:"40" ,
+	 left:"185" ,
+	 width:"165" ,
+	 height:"60",
+ hintText:'Mobile No'
+}
+'#txtPassword':{
+	borderStyle:Ti.UI.INPUT_BORDERSTYLE_ROUNDED,
+ width: '165',
+ height: '60',
+ color: "#000",
+ top:'90',
+ left:'10',
+ hintText:'Password'
+}
